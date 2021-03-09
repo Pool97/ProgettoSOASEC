@@ -8,6 +8,7 @@ public class ProgettoSoasecApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ProgettoSoasecApplication.class, args);
+        //prova
     }
 
 }
