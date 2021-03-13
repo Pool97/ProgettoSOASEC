@@ -14,6 +14,10 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile "org.springframework.boot:spring-boot-starter-security"
+    compile 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    runtime('mysql:mysql-connector-java')
 
     //Aggiungo dipendenze per invio SMS e mail
 

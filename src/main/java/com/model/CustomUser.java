@@ -1,46 +1,31 @@
-package com;
+package com.model;
 
-import org.springframework.security.core.GrantedAuthority;
+//Questa classe estende i dettagli di sicurezza di Spring per l'utente
 
-import java.util.ArrayList;
-import java.util.Collection;
+import org.springframework.security.core.userdetails.User;
 
-public class UserEntity {
-    private String email_id;
-    private String password;
-    private Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
+
+public class CustomUser extends User{
+    private static final long serialVersionUID = 1L;
     private String id;
     private String first_name;
     private String last_name;
     private String mobile;
     private String country;
     private String user_type;
-
-    //aggiunti gli attributi 2FA dell'utente
     private String is_tfa_enabled;
     private String tfa_default_type;
 
-    public String getEmail_id() {
-        return email_id;
-    }
-
-    public void setEmail_id(String email_id) {
-        this.email_id = email_id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public Collection<GrantedAuthority> getGrantedAuthoritiesList() {
-        return grantedAuthoritiesList;
-    }
-
-    public void setGrantedAuthoritiesList(Collection<GrantedAuthority> grantedAuthoritiesList) {
-        this.grantedAuthoritiesList = grantedAuthoritiesList;
+    public CustomUser(UserEntity user) {
+        super(user.getEmail_id(), user.getPassword(), user.getGrantedAuthoritiesList());
+        this.id = user.getId();
+        this.first_name = user.getFirst_name();
+        this.last_name = user.getLast_name();
+        this.mobile = user.getMobile();
+        this.country = user.getCountry();
+        this.user_type = user.getUser_type();
+        this.tfa_default_type = user.getTfa_default_type();
+        this.is_tfa_enabled = user.getIs_tfa_enabled();
     }
 
     public String getId() {
