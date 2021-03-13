@@ -13,11 +13,17 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
+    compile('org.springframework.boot:spring-boot-starter-web')
+
+    //Aggiungo dipendenze per invio SMS e mail
+
+    //Twilio
+    compile group:'com.twilio.sdk', name:'twilio', version:'7.11.0'
+
+    //Mail
+    compile('org.springframework.boot:spring-boot-starter-mail')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 test {
