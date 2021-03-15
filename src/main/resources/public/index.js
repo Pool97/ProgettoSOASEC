@@ -59,13 +59,16 @@ function getToken(username, password) {
     $.ajax({
         type: "POST",
         url: "http://localhost:8080/intermediary",
-        data: "username="+username+"&password="+password+"&grant_type=password",
+        data: {
+            'username': username,
+            'pass': password
+        },
         beforeSend: function(request) {
             request.setRequestHeader("Authorization", "Basic "+btoa("progettoSOASEC"));
             request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         },
         success: function(msg){
-            if(JSON.parse(JSON.stringify(msg)).is_2fa_enabled=="Y") {
+            if(JSON.parse(JSON.stringify(msg)).is_2fa_enabled==1) {
 
                 var email_two_fa_url = "http://localhost:8080/users/"+JSON.parse(JSON.stringify(msg)).id
                     +"/emails/"+JSON.parse(JSON.stringify(msg)).email_id+"/2fa";
