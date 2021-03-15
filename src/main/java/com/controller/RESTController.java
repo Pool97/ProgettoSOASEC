@@ -1,15 +1,12 @@
 package com.controller;
 
 import com.google.gson.JsonObject;
+import com.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -57,6 +54,7 @@ public class RESTController {
     public ResponseEntity<Object> sendOTPViaEmail(@PathVariable(PATH_VARIABLE_USER) String userID, @PathVariable(PATH_VARIABLE_MAIL)String emailAddress){
         if(dao.checkUserID(emailAddress)) {
             String twoFACode = generateOTP();
+            System.out.println(emailAddress);
             boolean isEmailSent = emailService.sendEmail(emailAddress, twoFACode);
             if (isEmailSent) {
                 dao.update2FAProperties(userID, twoFACode);
@@ -99,7 +97,6 @@ public class RESTController {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
-    //TODO CAMBIARE LE PROPERTY NON INSERENDOLE A MANO MA PRENDENDOLE DIRETTAMENTE DAL DATABASE
     /**
      * Risposta del server Tomcat sottoforma di json, il quale verrà in seguito parsato dal
      * file intermediary.js
@@ -107,15 +104,29 @@ public class RESTController {
      */
 
     @RequestMapping(value=ENDPOINT_CREDENTIAL, method = RequestMethod.POST)
-    public ResponseEntity<Object> verifyCredentials()
+    public ResponseEntity<Object> verifyCredentials(@RequestBody String requestData)
     {
-        JsonObject email_id = new JsonObject();
-        email_id.addProperty("email_id","matteo.tabarelli@studenti.unimi.it");
-        email_id.addProperty("id","1");
-        email_id.addProperty("mobile","3209150845");
-        email_id.addProperty("is_2fa_enabled","Y");
-        email_id.addProperty("tfa_default_type", "email");
+        String[] credentials = translateRequestInCredentials(requestData);
+        UserEntity user = (UserEntity) dao.loadUserByUsername(credentials[0]);
 
-        return new ResponseEntity<Object>(email_id, HttpStatus.OK);
+        if(user == null || !credentials[1].equals(user.getPassword())){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else {
+            JsonObject email_id = new JsonObject();
+            email_id.addProperty("id", user.getId());
+            email_id.addProperty("email_id", user.getEmail_id());
+            email_id.addProperty("mobile", user.getMobile());
+            email_id.addProperty("is_2fa_enabled", user.getIs_tfa_enabled());
+            email_id.addProperty("tfa_default_type", user.getTfa_default_type());
+            System.out.println(email_id.toString());
+            return new ResponseEntity<>(email_id, HttpStatus.OK);
+        }
+    }
+
+    private String[] translateRequestInCredentials(String requestData){
+        String[] credentialArray = requestData.split("&");
+        credentialArray[0] = credentialArray[0].replace("%40", "@").substring(9);
+        credentialArray[1] = credentialArray[1].substring(5);
+        return credentialArray;
     }
 }

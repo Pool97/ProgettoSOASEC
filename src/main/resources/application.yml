@@ -1,7 +1,7 @@
 spring:
-  http:
+  mvc:
     converters:
-      mvc.preferred-json-mapper: "gson"
+      preferred-json-mapper: "gson"
 
   application:
     name: two-factor-service

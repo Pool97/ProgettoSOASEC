@@ -1,11 +1,12 @@
 package com.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class UserEntity {
+public class UserEntity extends User {
     private String email_id;
     private String password;
     private Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
@@ -19,6 +20,17 @@ public class UserEntity {
     //aggiunti gli attributi 2FA dell'utente
     private String is_tfa_enabled;
     private String tfa_default_type;
+
+
+    public UserEntity(String username, String password, Collection<? extends GrantedAuthority> authorities, String mobile, String is_tfa_enabled, String tfa_default_type, String id) {
+        super(username, password, authorities);
+        this.email_id = username;
+        this.password = password;
+        this.mobile = mobile;
+        this.is_tfa_enabled = is_tfa_enabled;
+        this.tfa_default_type = tfa_default_type;
+        this.id = id;
+    }
 
     public String getEmail_id() {
         return email_id;
