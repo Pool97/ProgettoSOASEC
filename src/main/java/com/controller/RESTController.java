@@ -99,6 +99,7 @@ public class RESTController {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
+    //TODO CAMBIARE LE PROPERTY NON INSERENDOLE A MANO MA PRENDENDOLE DIRETTAMENTE DAL DATABASE
     /**
      * Risposta del server Tomcat sottoforma di json, il quale verrà in seguito parsato dal
      * file intermediary.js
