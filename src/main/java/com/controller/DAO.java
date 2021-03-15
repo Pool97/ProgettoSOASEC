@@ -28,6 +28,7 @@ public class DAO {
         jdbcTemplate.update("UPDATE users SET 2fa_code=?, 2fa_expire_time=? WHERE idUsers=?", twoFAcode, System.currentTimeMillis() / 1000 + 120, userID);
     }
 
+    //TODO NON FUNZIONA CONTROLLO CODICE, ANCHE SE SI INSERISCE UN CODICE SBAGLIATO VIENE CONSIDERATO CORRETTO
     /**
      * Controlla che il codice OTP inserito dall'utente nella web-app corrisponda a quello generato dal server
      * e memorizzato nel database in corrispondenza della riga dell'utente.
@@ -44,6 +45,7 @@ public class DAO {
         return list.size() > 0;
     }
 
+    //TODO NON FUNZIONA LA VERIFICA DI EMAIL E PASSWORD, ANCHE SE SI INSERISCONO DEI DATI ERRATI SI FA COMUNQUE IL LOGIN
     /**
      * Verifica che l'userID dell'utente sia presente all'interno del database
      * @param userID ID dell'utente nel database
