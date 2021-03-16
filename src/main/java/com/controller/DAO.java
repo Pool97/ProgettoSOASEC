@@ -63,7 +63,6 @@ public class DAO implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String emailAddress){
         String query = "SELECT idUsers, password, mobile, is_2fa_enabled, 2fa_default_type FROM users WHERE email_id = ?";
-
         try {
             UserDetails user = jdbcTemplate.queryForObject(query, (rs, rowNum) -> {
                 String id = rs.getString("idUsers");
