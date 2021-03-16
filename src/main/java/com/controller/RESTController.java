@@ -118,7 +118,6 @@ public class RESTController {
             email_id.addProperty("mobile", user.getMobile());
             email_id.addProperty("is_2fa_enabled", user.getIs_tfa_enabled());
             email_id.addProperty("tfa_default_type", user.getTfa_default_type());
-            System.out.println(email_id.toString());
             return new ResponseEntity<>(email_id, HttpStatus.OK);
         }
     }

@@ -8,6 +8,8 @@ $(document).ready(function(){
     });
 
     $("#submitBtn").click(function() {
+        $("#alertCredentials").hide();
+        $(".alert-danger").hide();
         getToken($('#emailAddressTxt').val().trim(),$('#pwd').val());
     });
 
