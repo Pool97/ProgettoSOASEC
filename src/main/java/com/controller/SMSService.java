@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SMSService {
-    private final static String ACCOUNT_SID = "";
-    private final static String AUTH_ID = "";
+    private final static String ACCOUNT_SID = "ACf07dd7ad3c0bbee174fbe962409f3cf4";
+    private final static String AUTH_ID = "Show";
     private final static String CONTENT_DESCR = "Your two Factor Authentication code is: ";
-    private final static String TWILIO_PHONE_NUMBER = "tuonumero";
+    private final static String TWILIO_PHONE_NUMBER = "+15136570836";
 
     static{
         Twilio.init(ACCOUNT_SID, AUTH_ID);
