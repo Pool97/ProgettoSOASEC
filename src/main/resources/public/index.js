@@ -11,6 +11,10 @@ $(document).ready(function(){
         getToken($('#emailAddressTxt').val().trim(),$('#pwd').val());
     });
 
+    $("#signUpBtn").click(function() {
+        signUp();
+    });
+
     $("#sendEmailLink").click(function() {
 
         send2facode(sessionStorage.getItem("email_two_fa_url"), function() {
@@ -54,6 +58,11 @@ function validateEmail(sEmail) {
     var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return filter.test(sEmail);
 }
+
+function signUp(){
+    $("#SignUpModal").modal('show');
+}
+
 
 function getToken(username, password) {
     $.ajax({
