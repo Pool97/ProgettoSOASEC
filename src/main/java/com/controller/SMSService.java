@@ -20,9 +20,8 @@ public class SMSService {
         Twilio.init(ACCOUNT_SID, AUTH_ID);
     }
 
-    public boolean sendSMS(String mobileNumber, String twoFACode){
+    public void sendSMS(String mobileNumber, String twoFACode){
         Message.creator(new PhoneNumber(mobileNumber), new PhoneNumber(TWILIO_PHONE_NUMBER),
                 CONTENT_DESCR + twoFACode).create();
-        return true;
     }
 }

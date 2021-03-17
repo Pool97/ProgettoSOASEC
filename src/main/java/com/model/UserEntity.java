@@ -7,37 +7,35 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class UserEntity extends User {
-    private String email_id;
+    private String emailAddress;
     private String password;
     private Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
     private String id;
-    private String first_name;
-    private String last_name;
     private String mobile;
-    private String country;
-    private String user_type;
 
-    //aggiunti gli attributi 2FA dell'utente
-    private String is_tfa_enabled;
-    private String tfa_default_type;
+    //aggiunto attributo 2FA che specifica la modalità di trasferimento dell'OTP preferita dall'utente
+    private String tfaDefaultType;
 
+    public final static String ID_COLUMN_DB = "idUsers";
+    public final static String PASSWORD_COLUMN_DB = "password";
+    public final static String MOBILE_NUM_COLUMN_DB = "mobile";
+    public final static String TFA_DEFAULT_TYPE_COLUMN_DB = "2fa_default_type";
 
-    public UserEntity(String username, String password, Collection<? extends GrantedAuthority> authorities, String mobile, String is_tfa_enabled, String tfa_default_type, String id) {
+    public UserEntity(String username, String password, Collection<? extends GrantedAuthority> authorities, String mobile, String tfaDefaultType, String id) {
         super(username, password, authorities);
-        this.email_id = username;
+        this.emailAddress = username;
         this.password = password;
         this.mobile = mobile;
-        this.is_tfa_enabled = is_tfa_enabled;
-        this.tfa_default_type = tfa_default_type;
+        this.tfaDefaultType = tfaDefaultType;
         this.id = id;
     }
 
-    public String getEmail_id() {
-        return email_id;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmail_id(String email_id) {
-        this.email_id = email_id;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public String getPassword() {
@@ -63,22 +61,6 @@ public class UserEntity extends User {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
     public String getMobile() {
         return mobile;
     }
@@ -87,32 +69,12 @@ public class UserEntity extends User {
         this.mobile = mobile;
     }
 
-    public String getCountry() { return country; }
-
-    public void setCountry(String country) { this.country = country; }
-
-    public String getUser_type() {
-        return user_type;
+    public String getTfaDefaultType() {
+        return tfaDefaultType;
     }
 
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
-    }
-
-    public String getIs_tfa_enabled() {
-        return is_tfa_enabled;
-    }
-
-    public void setIs_tfa_enabled(String is_tfa_enabled) {
-        this.is_tfa_enabled = is_tfa_enabled;
-    }
-
-    public String getTfa_default_type() {
-        return tfa_default_type;
-    }
-
-    public void setTfa_default_type(String tfa_default_type) {
-        this.tfa_default_type = tfa_default_type;
+    public void setTfaDefaultType(String tfaDefaultType) {
+        this.tfaDefaultType = tfaDefaultType;
     }
 
 
