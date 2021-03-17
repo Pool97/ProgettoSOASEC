@@ -14,7 +14,7 @@ import java.util.Properties;
 
 @Service
 public class EmailService {
-    private static final String USERNAME = "tuaemail";
+    private static final String USERNAME = "tuamail";
     private static final String PASSWORD = "tuapass";
     private final static String SUBJECT = "Two Factor Authentication code";
     private final static String CONTENT_DESCR = "Your two Factor Authentication code is: ";

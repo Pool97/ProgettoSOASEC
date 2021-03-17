@@ -149,13 +149,11 @@ public class RESTController {
      */
 
     private JsonObject prepareUserDetailsInJSON(UserEntity user){
-        System.out.println("Sono entratoo");
         JsonObject userDetails = new JsonObject();
         userDetails.addProperty("userID", user.getId());
         userDetails.addProperty("emailAddress", user.getEmailAddress());
         userDetails.addProperty("mobileNumber", user.getMobile());
         userDetails.addProperty("tfaDefaultType", user.getTfaDefaultType());
-        System.out.println(userDetails.toString());
         return userDetails;
     }
 }
