@@ -14,13 +14,14 @@ import java.util.Properties;
 
 @Service
 public class EmailService {
-    private static final String USERNAME = "roberto.poletti01@gmail.com";
-    private static final String PASSWORD = "vivailcss97";
+    private static final String USERNAME = "tuamail";
+    private static final String PASSWORD = "tuapass";
     private final static String SUBJECT = "Two Factor Authentication code";
     private final static String CONTENT_DESCR = "Your two Factor Authentication code is: ";
 
     /**
      * Crea un oggetto Properties contenente le informazioni di configurazione della connessione
+     *
      * @return Proprietà della connessione SMTP
      */
     private Properties createConnectionProperties(){
@@ -34,6 +35,7 @@ public class EmailService {
 
     /**
      * Crea una sessione mail con le proprietà SMTP
+     *
      * @return Sessione mail
      */
 
@@ -47,6 +49,7 @@ public class EmailService {
 
     /**
      * Crea il messaggio e-mail contenente l'OTP
+     *
      * @param emailAddress Indirizzo e-mail dell'utente
      * @param twoFAcode Codice OTP generato
      * @return Messaggio e-mail
@@ -62,6 +65,7 @@ public class EmailService {
 
     /**
      * Invia il messaggio e-mail contenente l'OTP all'utente
+     *
      * @param emailAddress Indirizzo e-mail dell'utente
      * @param twoFAcode Codice OTP generato
      * @return Esito dell'invio del messaggio
