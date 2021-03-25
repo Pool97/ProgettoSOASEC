@@ -138,7 +138,9 @@ function provideCredentialsToServer(username, password){
             });
         },
 
-        error: $(".alert-danger").show()
+        error: function(){
+            $(".alert-danger").show()
+        }
     });
 }
 
@@ -151,7 +153,9 @@ function getTFACodeFromServer(endpointTFA, callbackMethod){
     $.ajax({
         type: "PUT",
         url: endpointTFA,
-        success: callbackMethod(),
+        success: function() {
+            callbackMethod()
+        },
 
         error: function() {
             const alertDanger = $(".alert-danger");
@@ -170,7 +174,9 @@ function verifyTFACode(){
     $.ajax({
         type: "PUT",
         url: sessionStorage.getItem("verifyTFAUrl") + $("#tfa_code").val(),
-        success: window.location.href = "administrator.html",
+        success: function(){
+            window.location.href = "administrator.html"
+        },
 
         error: function () {
             const alertDanger = $("#2fa_error");
